@@ -1,47 +1,35 @@
-def sign(int)
-  if int.zero?
+safe = 0
+
+def sign(i)
+  if i.zero?
     :zero
-  elsif int.positive?
+  elsif i.positive?
     :+
   else
     :-
   end
 end
 
-count = 0
+def within_range?(i) = 1 <= i.abs && i.abs < 4 
+
+def same_sign?(arr) = arr.map { sign(_1) }.uniq.size <= 1
+
+def safe?(arr) = arr.all? { within_range?(_1) } && same_sign?(arr)
 
 File.readlines("input.txt").each do |line|
   parsed = line.split(" ")
     .map(&:to_i)
 
-  diff = nil
-  sign = sign(parsed.first)
-  prev = parsed.first
-  steps = 0
-  skipped = 0
-
-  parsed.each do |i|
-
-    if steps == 0
-      steps += 1
-      next
-    end
-
-    diff = prev - i
-
-    if !(1 <= diff.abs && diff.abs < 4 && sign == sign(i))
-      skipped += 1
-      next
-    end
-
-    sign = sign(i)
+  prev = parsed.shift
+  diffs = parsed.map do |i| 
+    ret = prev - i
     prev = i
-    steps += 1
+    ret
   end
 
-  if (steps == parsed.size || steps == parsed.size - 1) && skipped <= 1
-    count += 1
+  if safe?(diffs)
+    safe +=1 
   end
 end
 
-puts count
+p safe

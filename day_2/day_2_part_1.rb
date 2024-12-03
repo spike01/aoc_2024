@@ -10,6 +10,11 @@ def sign(i)
   end
 end
 
+def safe?(arr)
+  arr.all? { |diff| 1 <= diff.abs && diff.abs < 4 } &&
+     arr.map { |diff| sign(diff) }.uniq.size <= 1
+end
+
 File.readlines("input.txt").each do |line|
   parsed = line.split(" ")
     .map(&:to_i)
@@ -21,8 +26,7 @@ File.readlines("input.txt").each do |line|
     ret
   end
 
-  if diffs.drop(1).all? { |diff| 1 <= diff.abs && diff.abs < 4 } &&
-     diffs.drop(1).map { |diff| sign(diff) }.uniq.size <= 1
+  if safe?(diffs.drop(1))
     safe +=1 
   end
 end
