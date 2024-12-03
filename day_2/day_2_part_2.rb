@@ -20,15 +20,16 @@ File.readlines("input.txt").each do |line|
   parsed = line.split(" ")
     .map(&:to_i)
 
-  prev = parsed.shift
-  diffs = parsed.map do |i|
-    ret = prev - i
-    prev = i
-    ret
-  end
+  combos = parsed.combination(parsed.size - 1)
 
-  if safe?(diffs)
-    safe += 1
+  safe += 1 if combos.any? do |combo|
+    prev = combo.shift
+    diffs = combo.map do |i|
+      ret = prev - i
+      prev = i
+      ret
+    end
+    safe?(diffs)
   end
 end
 
