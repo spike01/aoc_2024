@@ -12,7 +12,7 @@ end
 
 def safe?(arr)
   arr.all? { |diff| 1 <= diff.abs && diff.abs < 4 } &&
-     arr.map { |diff| sign(diff) }.uniq.size <= 1
+    arr.map { |diff| sign(diff) }.uniq.size <= 1
 end
 
 File.readlines("input.txt").each do |line|
@@ -20,16 +20,15 @@ File.readlines("input.txt").each do |line|
     .map(&:to_i)
 
   prev = 0
-  diffs = parsed.map do |i| 
+  diffs = parsed.map do |i|
     ret = prev - i
     prev = i
     ret
   end
 
   if safe?(diffs.drop(1))
-    safe +=1 
+    safe += 1
   end
 end
 
 p safe
-

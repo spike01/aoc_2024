@@ -10,7 +10,7 @@ def sign(i)
   end
 end
 
-def within_range?(i) = 1 <= i.abs && i.abs < 4 
+def within_range?(i) = 1 <= i.abs && i.abs < 4
 
 def same_sign?(arr) = arr.map { sign(_1) }.uniq.size <= 1
 
@@ -21,14 +21,14 @@ File.readlines("input.txt").each do |line|
     .map(&:to_i)
 
   prev = parsed.shift
-  diffs = parsed.map do |i| 
+  diffs = parsed.map do |i|
     ret = prev - i
     prev = i
     ret
   end
 
   if safe?(diffs)
-    safe +=1 
+    safe += 1
   end
 end
 
