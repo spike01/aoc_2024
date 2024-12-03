@@ -10,7 +10,7 @@ def sign(i)
   end
 end
 
-def within_range?(i) = 1 <= i.abs && i.abs < 4
+def within_range?(i) = (1..3).cover?(i.abs)
 
 def same_sign?(arr) = arr.map { sign(_1) }.uniq.size <= 1
 

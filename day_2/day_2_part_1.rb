@@ -11,7 +11,7 @@ def sign(i)
 end
 
 def safe?(arr)
-  arr.all? { |diff| 1 <= diff.abs && diff.abs < 4 } &&
+  arr.all? { |diff| 1 <= (1..3).cover?(i.abs)
     arr.map { |diff| sign(diff) }.uniq.size <= 1
 end
 
